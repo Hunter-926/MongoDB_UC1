@@ -1,0 +1,107 @@
+
+<!-- Para encontrar clientes com idade maior que 30 -->
+```js
+db.clientes.find({ "idade": { "$gt": 30 } }).limit(2)
+```
+
+<!-- Para encontrar clientes com idade maior que 29 e menor que 41 anos -->
+```js
+db.clientes.find({ "idade": { "$gt": 29 , "$lt": 41 } }).limit(5)
+```
+
+<!-- Para buscar clientes que moram em São Paulo ou Rio de Janeiro -->
+```js
+db.clientes.find({ "cidade": { "$in": ["São Paulo", "Rio de Janeiro"] } }).limit(2)
+```
+
+<!-- Para encontrar os clientes com idade maior que 29 e menor que 41 anos que moram em São Paulo ou no Rio de Janeiro -->
+```js
+db.clientes.find({ 
+	"idade": { "$gt": 29 , "$lt": 41 } }).limit(5)
+db.clientes.find({ 
+	"cidade": { "$in": ["São Paulo", "Rio de Janeiro"] } }).limit(5)
+```
+<!-- Você pode combinar vários operadores para consultas mais complexas(uma forma diferente de fazer a mesma coisa que a operação de cima) -->
+```js
+db.clientes.find({
+  "$or": [
+    { "idade": { "$lt": 25 } },
+    { "cidade": "São Paulo" }
+  ]
+}).limit(5)
+```
+<!-- Para verificar quais índices foram criados -->
+```js
+db.clientes.getIndexes()
+```
+<!-- Vamos criar um índice no campo email, pois ele é usado com frequência para buscas -->
+```js
+db.clientes.createIndex({ "email": 1 })
+```
+
+```js
+db.movies.aggregate([
+    { $match: {
+        "imdb.rating": { 
+            $exists: true, 
+                $ne: ""
+            }
+        }
+    },
+    { $project: {
+        "imdb.rating":1, _id: 0,
+        Titulo: "$title", Ano: "$year",
+        }
+    },
+    { $sort: { "imdb.rating": -1} },
+    { $limit: 5}
+])
+```
+
+```js
+
+```
+db.movies.aggregate([
+    { $year: {
+        "year": { 
+            "$gt": 1969 , "$lt": 1980,
+            }
+        } 
+    },
+    { $match: {
+        "imdb.rating": { 
+            $exists: true, 
+                $ne: ""
+            }
+        }
+    },
+    { $project: {
+        "imdb.rating":1, _id: 0,
+        Titulo: "$title", Ano: "$year",
+        }
+    },
+    { $sort: { "imdb.rating": -1} },
+    { $limit: 5}
+])
+
+
+
+
+
+db.movies.find({ 
+	"year": { "$gt": 1969 , "$lt": 1980 } }).limit(5)S
+```js
+
+```
+
+```js
+
+```
+
+
+
+
+<!-- PROMPTS PARA FAZER DOCUMENTOS SOBRE O MONGODB
+Como um especialista em mongodb e mondodb atlas, gere uma tabela com todos os operadores suportados pela função find().
+
+Gere uma listagem com exemplos de uso de cada operador. Adicione exemplos de operadores compostos. Utilize o banco de dados sample_mflix para gerar os exemplos -->
