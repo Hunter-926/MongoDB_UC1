@@ -84,12 +84,6 @@ db.movies.aggregate([
     { $limit: 5}
 ])
 
-
-
-
-
-db.movies.find({ 
-	"year": { "$gt": 1969 , "$lt": 1980 } }).limit(5)S
 ```js
 
 ```
@@ -98,10 +92,19 @@ db.movies.find({
 
 ```
 
+.\mongodump --uri="mongodb+srv://wesley926@cluster-uc1.uw868pi.mongodb.net/loja" --out ./backup/
 
 
+
+mongodump --uri="mongodb+srv://wesley926@cluster-uc1.uw868pi.mongodb.net/loja" --out ./backup/
+
+mongosh "mongodb+srv://cluster-uc1.uw868pi.mongodb.net/" --apiVersion 1 --username wesley926
 
 <!-- PROMPTS PARA FAZER DOCUMENTOS SOBRE O MONGODB
 Como um especialista em mongodb e mondodb atlas, gere uma tabela com todos os operadores suportados pela função find().
 
 Gere uma listagem com exemplos de uso de cada operador. Adicione exemplos de operadores compostos. Utilize o banco de dados sample_mflix para gerar os exemplos -->
+
+.\mongorestore --uri="mongodb+srv://wesley926@cluster-uc1.uw868pi.mongodb.net/lojav2" ./backup/loja/
+
+mongorestore --uri="mongodb+srv://usuario:senha@cluster0.abcd.mongodb.net/meuBancoRestaurado" ./backup/meuBanco/
